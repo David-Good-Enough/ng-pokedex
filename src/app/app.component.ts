@@ -3,11 +3,13 @@ import { RouterOutlet } from '@angular/router';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { SortbydatepipePipe } from './SortByDate';
 import { SearchPipe } from './SearchPipe';
+import { SortByNamePipe } from './SortByNamePipe';
 import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ProductCardComponent, SortbydatepipePipe, SearchPipe, FormsModule],
+  imports: [RouterOutlet, ProductCardComponent, SortbydatepipePipe, SearchPipe, SortByNamePipe, FormsModule],
   template: `
     <h1>Welcome to {{title}}!</h1>
     <h2>Favorite products: {{cuntfavorite}}</h2>
@@ -16,14 +18,16 @@ import { FormsModule } from '@angular/forms';
     <input type="text" [(ngModel)]="searchText" placeholder="Rechercher un produit" />
 
     <!-- Select pour le tri -->
-    <label for="sortOrder">Trier par date :</label>
-    <select id="sortOrder" [(ngModel)]="isAscending">
-      <option [ngValue]="true">Croissant</option>
-      <option [ngValue]="false">Décroissant</option>
+    <label for="sortOrder">Trier par :</label>
+    <select id="sortOrder" [(ngModel)]="sortOption">
+      <option value="nameAsc">Nom (A-Z)</option>
+      <option value="nameDesc">Nom (Z-A)</option>
+      <option value="dateAsc">Date (Croissant)</option>
+      <option value="dateDesc">Date (Décroissant)</option>
     </select>
     
     <!-- Application des pipes de recherche et de tri -->
-    @for (p of (product | SearchPipe: searchText | SortByDate: isAscending); track p.id) {
+    @for (p of (product | SearchPipe: searchText | SortByName: sortOption | SortByDate: sortOption); track p.id) {
       <app-product-card 
         [product]="p"
         (addItemEvent)="addItem($event)"
@@ -36,8 +40,8 @@ import { FormsModule } from '@angular/forms';
 export class AppComponent {
   title = 'ng-pokedex';
   cuntfavorite = 0;
-  isAscending = true;
   searchText = '';
+  sortOption = 'nameAsc'; // Valeur par défaut
   product = [
     {id: 0, name: 'Harry Potter', isFavorite: false, createdDate: new Date(1980, 6, 31)},
     {id: 1, name: 'Ronnald Weasley', isFavorite: false, createdDate: new Date(1980, 3, 1)},
