@@ -1,16 +1,15 @@
-import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
+import { Component, Input, EventEmitter, Output, inject } from '@angular/core';
 import { Product } from '../product';
+import { ProductService } from '../product.service';
+import { ActivatedRoute } from '@angular/router';
 import { UpperCasePipe } from '@angular/common';
-import {DatePipe} from '@angular/common';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-product-card',
-  imports: [ UpperCasePipe, DatePipe ],
+  selector: 'app-products-detail',
+  imports: [ UpperCasePipe ],
   template: `
   <div>
     <h1>{{product.name | uppercase}}</h1> 
-    <h2>{{product.createdDate | date: 'longDate':'UTC':'fr'}}</h2> 
     @if (product.isFavorite) {
       <span>
         Favorite product
@@ -22,23 +21,24 @@ import { Router } from '@angular/router';
         <button (click)="switchFavorite()">Make favorite</button>
       </span>
     }
-
-    <button (click)="navigateToProduct(product.id)">Voir le produit</button>
   </div>
   `,
   styles: ``
 })
-export class ProductCardComponent {
-  @Input({required:true}) product: Product = {id: 0, name: '', isFavorite: false, createdDate: new Date()};
+export class ProductsDetailComponent {
+  product: Product = {id: 0, name: '', isFavorite: false, createdDate: new Date()};
   @Output() addItemEvent = new EventEmitter<number>();
+  productService = inject(ProductService);
 
   switchFavorite() {
     this.product.isFavorite = !this.product.isFavorite;
     this.addItemEvent.emit(this.product.isFavorite ? 1 : -1);
   }
 
-  private router = inject(Router);
-  navigateToProduct(id: number) {
-    this.router.navigate(['/product/', id]);
-  } 
+  constructor(private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      this.product = this.productService.getProductById(parseInt(params['id']));
+    });
+  }
+
 }
