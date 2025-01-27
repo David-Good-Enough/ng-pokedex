@@ -13,10 +13,8 @@ import { ProductService } from '../product.service';
   template: `
     <h2>Favorite products: {{cuntfavorite}}</h2>
     
-    <!-- Barre de recherche -->
     <input type="text" [(ngModel)]="searchText" placeholder="Rechercher un personnage" />
 
-    <!-- Select pour le tri -->
     <label for="sortOrder">Trier par :</label>
     <select id="sortOrder" [(ngModel)]="sortOption">
       <option value="nameAsc">Nom (A-Z)</option>
@@ -25,7 +23,6 @@ import { ProductService } from '../product.service';
       <option value="dateDesc">Date (Décroissant)</option>
     </select>
     
-    <!-- Application des pipes de recherche et de tri -->
     @for (p of (product | SearchPipe: searchText | SortByName: sortOption | SortByDate: sortOption); track p.id) {
       <app-product-card 
         [product]="p"

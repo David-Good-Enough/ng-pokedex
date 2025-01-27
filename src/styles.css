@@ -1,1 +1,126 @@
-/* You can add global styles to this file, and also import other style files */
+/* product-card.component.css */
+
+.app-product-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .app-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .app-product-card h1 {
+    font-size: 1.5rem;
+    color: #3f51b5;
+    margin-bottom: 0.5rem;
+  }
+  
+  .app-product-card h2 {
+    font-size: 1rem;
+    color: #757575;
+    margin-bottom: 1rem;
+  }
+  
+  .app-product-card span {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .app-product-card button {
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  
+  .app-product-card button:hover {
+    background-color: #303f9f;
+  }
+  
+  /* products-list.component.css */
+  
+  .app-products-list {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  .app-products-list h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .app-products-list input[type="text"] {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 1rem auto;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: block;
+  }
+  
+  .app-products-list select {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* app.component.css */
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f4f6;
+    color: #333;
+  }
+  
+  header {
+    background-color: #3f51b5;
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  header nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: bold;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #3f51b5;
+    color: white;
+    position: botton;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .app-product-card {
+      margin: 1rem 0.5rem;
+    }
+  
+    .app-products-list input[type="text"],
+    .app-products-list select {
+      max-width: 100%;
+    }
+  }
+  

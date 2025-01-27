@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../product';
 import { UpperCasePipe } from '@angular/common';
 import {DatePipe} from '@angular/common';
-import { ProductService } from '../product.service';
+
 
 @Component({
   selector: 'app-product-card',
