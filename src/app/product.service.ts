@@ -28,8 +28,8 @@ export class ProductService {
     return this.product.map(p => <Product>p);
   }
 
-  getProductById(id: number): Product {
-    return this.product[id];
+  getProductById(id: number): Product | undefined {
+    return this.product.find(p => p.id === id);
   }
   
   constructor() { }
